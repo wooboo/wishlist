@@ -1,0 +1,41 @@
+<section data-ng-controller="WishesController" data-ng-init="find()">
+    <div class="page-header row">
+        <h1 data-ng-bind="list.name" class="pull-left"></h1>
+        <div class="pull-right" data-ng-show="canEditList(list)">
+            <a class="btn btn-primary" href="/#!/lists/{{list._id}}/edit">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            <a class="btn btn-primary" href="/#!/lists/{{list._id}}/wishes/create">
+                <i class="glyphicon glyphicon-plus"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div data-ng-repeat="wish in wishes" class="col-sx-23 col-sm-6 col-md-3">
+            <a data-ng-href="#!/lists/{{list._id}}/wishes/{{wish._id}}">
+                <div class="thumbnail">
+                    <wit-img src="wish.image" w="190" h="190" m="letterbox" f="jpg" data-ng-show="wish.image"></wit-img>
+                </div>
+                <div class="caption">
+                    <h4 data-ng-bind="wish.name"></h4>
+                    <p>{{wish.description}}</p>
+                </div>
+            </a>
+            <div>
+                <p>
+                    <a data-ng-href="#!/lists/{{list._id}}/wishes/{{wish._id}}/edit" class="btn btn-primary" role="button">
+               Edit
+            </a>
+                    <a href="{{wish.url}}" target="_blank" class="btn btn-default" role="button">
+               Details
+            </a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!wishes.$resolved || wishes.length">
+        No Wishes yet, why don't you <a href="/#!/lists/{{list._id}}/wishes/create">create one</a>?
+    </div>
+</section>

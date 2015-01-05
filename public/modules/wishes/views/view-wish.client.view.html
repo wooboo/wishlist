@@ -1,0 +1,33 @@
+<section data-ng-controller="WishesController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1 data-ng-bind="wish.name"></h1>
+    </div>
+    <div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == wish.user._id))">
+        <a class="btn btn-primary" href="/#!/wishes/{{wish._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-primary" data-ng-click="remove();">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+    <div class="row">
+        <wit-img src="wish.image" pc="100" data-ng-show="wish.image"></wit-img>
+        <p>{{wish.description}}</p>
+        <p>
+            <a data-ng-href="#!/lists/{{wish.list._id}}/wishes/{{wish._id}}/edit" class="btn btn-primary" role="button">
+               Edit
+            </a>
+            <a href="{{wish.url}}" target="_blank" class="btn btn-default" role="button">
+               Details
+            </a>
+        </p>
+    </div>
+    <small>
+        <em class="text-muted">
+            Posted on
+            <span data-ng-bind="wish.audit.createDate | date:'mediumDate'"></span>
+            by
+            <span data-ng-bind="wish.audit.createUser.displayName"></span>
+        </em>
+    </small>
+</section>
